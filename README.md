@@ -26,4 +26,5 @@ Real-time alerting for failed data pipelines.
 
 Improved monitoring and observability in data platforms.
 
-⚠️ Security Note: This template has been sanitized. Replace <LOGIC_APP_TRIGGER_URL> and dataset references with your actual values before deploying.
+⚠️ Security Note: This template has been sanitized. Replace <LOGIC_APP_TRIGGER_URL> and dataset references with your actual values before deploying
+⚠️ Security Note: This Logic App template has been sanitized. Replace placeholders (<YOUR_EMAIL>, <SUBSCRIPTION_ID>, <RESOURCE_GROUP>, <CONNECTION_NAME>) with your actual values before deployment.
