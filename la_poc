@@ -1,0 +1,80 @@
+{
+    "definition": {
+        "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+        "contentVersion": "1.0.0.0",
+        "triggers": {
+            "When_an_HTTP_request_is_received": {
+                "type": "Request",
+                "kind": "Http",
+                "inputs": {
+                    "schema": {
+                        "type": "object",
+                        "properties": {
+                            "title": {
+                                "type": "string"
+                            },
+                            "message": {
+                                "type": "string"
+                            },
+                            "color": {
+                                "type": "string"
+                            },
+                            "dataFactoryName": {
+                                "type": "string"
+                            },
+                            "pipelineName": {
+                                "type": "string"
+                            },
+                            "pipelineRunId": {
+                                "type": "string"
+                            },
+                            "time": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "actions": {
+            "Send_an_email_(V2)": {
+                "type": "ApiConnection",
+                "inputs": {
+                    "host": {
+                        "connection": {
+                            "name": "@parameters('$connections')['outlook']['connectionId']"
+                        }
+                    },
+                    "method": "post",
+                    "body": {
+                        "To": <YOUR_EMAIL>,
+                        "Subject": "@triggerBody()?['title']",
+                        "Body": "<p class=\"editor-paragraph\">Hi,</p><br><p class=\"editor-paragraph\">The @{triggerBody()?['pipelineName']} with run id @{triggerBody()?['pipelineRunId']} has failed. Error msg-</p><p class=\"editor-paragraph\">@{triggerBody()?['message']}</p>",
+                        "Importance": "Normal"
+                    },
+                    "path": "/v2/Mail"
+                },
+                "runAfter": {}
+            }
+        },
+        "outputs": {},
+        "parameters": {
+            "$connections": {
+                "type": "Object",
+                "defaultValue": {}
+            }
+        }
+    },
+    "parameters": {
+        "$connections": {
+            "type": "Object",
+            "value": {
+                "outlook": {
+                    "id": "/subscriptions/<SUBSCRIPTION_ID>/providers/Microsoft.Web/locations/<REGION>/managedApis/outlook",
+                    "connectionId": "/subscriptions/<SUBSCRIPTION_ID>/resourceGroups/<RESOURCE_GROUP>/providers/Microsoft.Web/connections/<CONNECTION_NAME>",
+                    "connectionName": "<CONNECTION_NAME>"
+                }
+            }
+        }
+    }
+}
