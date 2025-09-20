@@ -81,7 +81,7 @@
                 "userProperties": [],
                 "typeProperties": {
                     "method": "POST",
-                    "url": "https://prod-00.australiasoutheast.logic.azure.com:443/workflows/4b88bd22af60410ead5b610783e656f8/triggers/When_an_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_an_HTTP_request_is_received%2Frun&sv=1.0&sig=60K6h97n9BYl2tXOy6UTP6VN-H3-FRyVJ4Dhzfxiduc",
+                    "url": "<LOGIC_APP_TRIGGER_URL>",
                     "body": {
                         "value": "{\"title\":\"Pipeline Run Failed\",\n\"message\":\"Pipeline failed\",\n\"color\":\"Red\",\n\"dataFactoryName\":\"@{pipeline().DataFactory}\",\n\"pipelineName\":\"@{pipeline().pipeline}\",\n\"pipelineRunId\":\"@{pipeline().RunId}\",\n\"time\":\"@{utcNow()}\"\n}",
                         "type": "Expression"
