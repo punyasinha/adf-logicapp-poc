@@ -16,9 +16,12 @@ The solution simulates a failing pipeline in ADF and triggers a Logic App workfl
 
 ## Tech Stack:
 
-Azure Data Factory (Pipeline Orchestration)
+Azure Data Factory (Pipeline Orchestration)\
+<img width="729" height="258" alt="Screenshot 2025-09-20 at 3 20 31 pm" src="https://github.com/user-attachments/assets/db776919-eb01-48e9-a300-370d7e629193" />
+
 
 Azure Logic Apps (Event-driven automation)
+<img width="303" height="293" alt="Screenshot 2025-09-20 at 3 20 45 pm" src="https://github.com/user-attachments/assets/79c8d414-4b8b-4bb8-b0f9-f9070dda6b3e" />
 
 Use Cases:
 
