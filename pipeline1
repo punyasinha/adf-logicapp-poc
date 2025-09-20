@@ -1,0 +1,94 @@
+{
+    "name": "pipeline1",
+    "properties": {
+        "activities": [
+            {
+                "name": "Copy data1",
+                "type": "Copy",
+                "dependsOn": [],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "source": {
+                        "type": "DelimitedTextSource",
+                        "storeSettings": {
+                            "type": "AzureBlobFSReadSettings",
+                            "recursive": true,
+                            "enablePartitionDiscovery": false
+                        },
+                        "formatSettings": {
+                            "type": "DelimitedTextReadSettings"
+                        }
+                    },
+                    "sink": {
+                        "type": "DelimitedTextSink",
+                        "storeSettings": {
+                            "type": "AzureBlobFSWriteSettings"
+                        },
+                        "formatSettings": {
+                            "type": "DelimitedTextWriteSettings",
+                            "quoteAllText": true,
+                            "fileExtension": ".txt"
+                        }
+                    },
+                    "enableStaging": false,
+                    "translator": {
+                        "type": "TabularTranslator",
+                        "typeConversion": true,
+                        "typeConversionSettings": {
+                            "allowDataTruncation": true,
+                            "treatBooleanAsNumber": false
+                        }
+                    }
+                },
+                "inputs": [
+                    {
+                        "referenceName": "source",
+                        "type": "DatasetReference"
+                    }
+                ],
+                "outputs": [
+                    {
+                        "referenceName": "target",
+                        "type": "DatasetReference"
+                    }
+                ]
+            },
+            {
+                "name": "Web1",
+                "type": "WebActivity",
+                "dependsOn": [
+                    {
+                        "activity": "Copy data1",
+                        "dependencyConditions": [
+                            "Failed"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "method": "POST",
+                    "url": "https://prod-00.australiasoutheast.logic.azure.com:443/workflows/4b88bd22af60410ead5b610783e656f8/triggers/When_an_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_an_HTTP_request_is_received%2Frun&sv=1.0&sig=60K6h97n9BYl2tXOy6UTP6VN-H3-FRyVJ4Dhzfxiduc",
+                    "body": {
+                        "value": "{\"title\":\"Pipeline Run Failed\",\n\"message\":\"Pipeline failed\",\n\"color\":\"Red\",\n\"dataFactoryName\":\"@{pipeline().DataFactory}\",\n\"pipelineName\":\"@{pipeline().pipeline}\",\n\"pipelineRunId\":\"@{pipeline().RunId}\",\n\"time\":\"@{utcNow()}\"\n}",
+                        "type": "Expression"
+                    }
+                }
+            }
+        ],
+        "annotations": []
+    }
+}
