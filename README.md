@@ -21,6 +21,7 @@ Azure Data Factory (Pipeline Orchestration)\
 
 
 Azure Logic Apps (Event-driven automation)
+
 <img width="303" height="293" alt="Screenshot 2025-09-20 at 3 20 45 pm" src="https://github.com/user-attachments/assets/79c8d414-4b8b-4bb8-b0f9-f9070dda6b3e" />
 
 Use Cases:
