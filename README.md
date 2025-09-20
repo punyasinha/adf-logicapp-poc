@@ -25,3 +25,5 @@ Use Cases:
 Real-time alerting for failed data pipelines.
 
 Improved monitoring and observability in data platforms.
+
+⚠️ Security Note: This template has been sanitized. Replace <LOGIC_APP_TRIGGER_URL> and dataset references with your actual values before deploying.
